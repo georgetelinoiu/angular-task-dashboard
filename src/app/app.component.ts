@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from "./services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'angular-task-dashboard';
+  title = 'Task Dashboard';
+  constructor(private authService: AuthService) {}
+
+  isLoggedIn(): boolean {
+    return this.authService.isTokenValid();
+  }
 }

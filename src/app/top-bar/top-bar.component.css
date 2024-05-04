@@ -1,0 +1,27 @@
+/* top-bar.component.css */
+.spacer {
+  flex: 1 1 auto;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+.custom-menu {
+  margin-top: 30px; /* Adjust this value as needed to position the menu below the button */
+}
+
+::ng-deep .mat-menu-content button.mat-menu-item {
+  width: auto;
+}
+
+::ng-deep .mat-menu-panel {
+  top: 100% !important;
+  left: 0 !important;
+  z-index: 9999 !important;
+}
+

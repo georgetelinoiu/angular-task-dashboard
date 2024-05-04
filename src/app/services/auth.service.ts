@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   private clientSecret = 'YwMR7|UKN~'; // Replace this with your client secret
   private tokenExpiration: Date | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string): Observable<any> {
     const url = `${this.apiUrl}/oauth_token.do`;
@@ -42,6 +43,8 @@ export class AuthService {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('tokenExpiration');
+    this.router.navigateByUrl('/login');
+    window.location.reload();
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
