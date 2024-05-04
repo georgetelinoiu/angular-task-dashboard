@@ -1,4 +1,3 @@
-// auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -11,6 +10,7 @@ export class AuthService {
   private apiUrl = 'https://dev256586.service-now.com'; // Replace this with your ServiceNow API URL
   private clientId = '4f2ee7bf983102102ea9416dc5391eab'; // Replace this with your client ID
   private clientSecret = 'YwMR7|UKN~'; // Replace this with your client secret
+  private tokenExpiration: Date | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -23,26 +23,40 @@ export class AuthService {
 
     return this.http.post<any>(url, body, { headers }).pipe(
       tap(response => {
-        // You might handle authentication tokens or other data here
-        // For example, you could store tokens in local storage
-        localStorage.setItem('accessToken', response.access_token);
-        localStorage.setItem('refreshToken', response.refresh_token);
+        const accessToken = response.access_token;
+        const refreshToken = response.refresh_token;
+        const expiresIn = response.expires_in; // Token expiration time in seconds
+
+        const expirationDate = new Date();
+        expirationDate.setSeconds(expirationDate.getSeconds() + expiresIn);
+
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('tokenExpiration', expirationDate.getTime().toString());
       }),
       catchError(this.handleError<any>('login'))
     );
   }
 
   logout(): void {
-    // Clear tokens from local storage or any other cleanup
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    localStorage.removeItem('tokenExpiration');
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
-      // Let the app keep running by returning an empty result
       return of(result as T);
     };
+  }
+
+  isTokenValid(): boolean {
+    const expirationDateString = localStorage.getItem('tokenExpiration');
+    if (!expirationDateString) {
+      return false;
+    }
+    const expirationDate = new Date(parseInt(expirationDateString, 10));
+    return expirationDate > new Date();
   }
 }
