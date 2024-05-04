@@ -10,6 +10,8 @@ export class TopBarComponent {
 
   showMenu: boolean = false;
   showUserMenu: boolean = false;
+  profilePicUrl: string | null = localStorage.getItem('profilePicUrl');
+  userName: string | null = localStorage.getItem('username');
 
   constructor(private authService: AuthService) {}
 

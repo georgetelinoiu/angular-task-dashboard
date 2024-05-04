@@ -12,6 +12,9 @@ export class AuthService {
   private clientId = '4f2ee7bf983102102ea9416dc5391eab'; // Replace this with your client ID
   private clientSecret = 'YwMR7|UKN~'; // Replace this with your client secret
   private tokenExpiration: Date | null = null;
+  private profileUrl = 'https://dev256586.service-now.com/api/now/table/sys_user'; // Replace with your ServiceNow API URL
+  private username = 'admin';
+  private password = 'Kf2kZ1yNS-$w';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -34,15 +37,28 @@ export class AuthService {
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
         localStorage.setItem('tokenExpiration', expirationDate.getTime().toString());
+
+
+        this.getUserProfileData(username).subscribe(profile => {
+          localStorage.setItem('username', username);
+          if(profile.result[0].avatar != null)
+          localStorage.setItem('profilePicUrl', 'https://dev256586.service-now.com/' + profile.result[0].avatar + ".iix");
+          localStorage.setItem('sysId', profile.result[0].sys_id);
+        })
       }),
       catchError(this.handleError<any>('login'))
     );
   }
 
+  getUserProfileData(username: String): Observable<any> {
+    const profileUrl = `${this.profileUrl}?sysparm_query=user_name=${username}&sysparm_limit=1`;
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Basic ' + btoa(this.username + ':' + this.password));
+    return this.http.get<any[]>(profileUrl, {headers});
+  }
+
   logout(): void {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('tokenExpiration');
+    localStorage.clear();
     this.router.navigateByUrl('/login');
     window.location.reload();
   }

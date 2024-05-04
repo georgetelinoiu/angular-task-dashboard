@@ -1,4 +1,3 @@
-/* top-bar.component.css */
 .spacer {
   flex: 1 1 auto;
 }
@@ -24,4 +23,14 @@ mat-sidenav {
   left: 0 !important;
   z-index: 9999 !important;
 }
+
+.profile-pic {
+  width: 40px; /* Adjust the width as needed */
+  height: 40px; /* Set the height to match the width for a round shape */
+  border-radius: 50%; /* Make the image round */
+  object-fit: cover; /* Ensure the image covers the entire space */
+  margin-right: 5px; /* Adjust margin for positioning */
+  margin-top: -10px; /* Move the image up */
+}
+
 
