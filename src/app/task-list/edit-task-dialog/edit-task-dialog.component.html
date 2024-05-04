@@ -1,14 +1,19 @@
-<h2>Edit Task</h2>
-<div>
-  <p>{{ data.task.description }}</p>
-  <mat-form-field>
-    <mat-label>Status</mat-label>
-    <mat-select [(ngModel)]="selectedStatus">
-      <mat-option *ngFor="let status of data.statuses" [value]="status">{{ status }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-<div class="button-container">
-  <button mat-button color="primary" (click)="onCancelClick()">Cancel</button>
-  <button mat-button color="primary">Save</button>
+<!-- edit-task-dialog.component.html -->
+<div class="edit-task-dialog-container">
+  <h2 class="edit-task-dialog-heading">Edit Task</h2>
+  <div class="task-description-container">
+    <p class="task-description">{{ data.task.description }}</p>
+  </div>
+  <div class="status-select-container">
+    <mat-form-field class="status-select-field">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="selectedStatus" class="status-select">
+        <mat-option *ngFor="let status of data.statuses" [value]="status">{{ status }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="button-container">
+    <button mat-button color="primary" (click)="onCancelClick()" class="cancel-button">Cancel</button>
+    <button mat-button color="primary" class="save-button">Save</button>
+  </div>
 </div>

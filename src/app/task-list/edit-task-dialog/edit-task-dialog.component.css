@@ -1,0 +1,54 @@
+/* edit-task-dialog.component.css */
+.edit-task-dialog-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f0f4f8; /* Light blue background */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-task-dialog-heading {
+  color: #007bff; /* Blue color for heading */
+  margin-bottom: 20px;
+}
+
+.task-description-container {
+  margin-bottom: 20px;
+}
+
+.task-description {
+  font-size: 16px;
+}
+
+.status-select-container {
+  margin-bottom: 20px;
+}
+
+.status-select-field {
+  width: 100%;
+}
+
+.status-select {
+  color: #333333; /* Dark gray text color */
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel-button,
+.save-button {
+  background-color: #007bff; /* Blue color for buttons */
+  color: #ffffff; /* White text color */
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-button:hover,
+.save-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}

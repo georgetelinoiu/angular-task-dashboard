@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from "../services/taskservice.service";
-import {MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {EditTaskDialogComponent} from "./edit-task-dialog/edit-task-dialog.component";
 
 
@@ -30,13 +30,15 @@ export class TaskListComponent implements OnInit {
   }
 
   openEditDialog(task: { description: string }): void {
-    const dialogRef = this.dialog.open(EditTaskDialogComponent, {
-      width: '400px',
-      data: { task: task, statuses: ['Pending', 'In Progress', 'Completed'] }
-    });
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.width = '400px';
+    dialogConfig.data = { task: task, statuses: ['Pending', 'In Progress', 'Completed'] };
+    dialogConfig.panelClass = 'makeItMiddle';
+
+    const dialogRef = this.dialog.open(EditTaskDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
 }

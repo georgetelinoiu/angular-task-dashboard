@@ -1,11 +1,17 @@
 <!-- task-list.component.html -->
-<div *ngIf="tasks.length > 0">
-  <h2>Task List</h2>
+<div *ngIf="tasks.length > 0" class="task-list-container">
+  <h2 class="task-list-heading">Task List</h2>
   <div *ngFor="let task of tasks" class="task-item">
-    <span>{{ task.description }}</span>
-    <button mat-button color="primary" (click)="openEditDialog(task)">Edit</button>
+    <div>
+      <p><strong>Task Number:</strong> {{ task.number }}</p>
+      <p><strong>Description:</strong> {{ task.description }}</p>
+      <p><strong>Urgency:</strong> {{ task.urgency }}</p>
+      <p><strong>Impact:</strong> {{ task.impact }}</p>
+      <p><strong>Opened At:</strong> {{ task.opened_at }}</p>
+    </div>
+    <button mat-button class="edit-button" color="primary" (click)="openEditDialog(task)">Edit</button>
   </div>
 </div>
-<div *ngIf="tasks.length === 0">
+<div *ngIf="tasks.length === 0" class="no-tasks-message">
   <p>No tasks available.</p>
 </div>
