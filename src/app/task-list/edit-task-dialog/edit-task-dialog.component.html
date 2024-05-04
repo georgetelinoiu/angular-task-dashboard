@@ -1,0 +1,14 @@
+<h2>Edit Task</h2>
+<div>
+  <p>{{ data.task.description }}</p>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="selectedStatus">
+      <mat-option *ngFor="let status of data.statuses" [value]="status">{{ status }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="button-container">
+  <button mat-button color="primary" (click)="onCancelClick()">Cancel</button>
+  <button mat-button color="primary">Save</button>
+</div>

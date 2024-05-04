@@ -8,7 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://dev256586.service-now.com/'; // Replace this with your ServiceNow API URL
+  private apiUrl = 'https://dev256586.service-now.com'; // Replace this with your ServiceNow API URL
   private clientId = '4f2ee7bf983102102ea9416dc5391eab'; // Replace this with your client ID
   private clientSecret = 'YwMR7|UKN~'; // Replace this with your client secret
 

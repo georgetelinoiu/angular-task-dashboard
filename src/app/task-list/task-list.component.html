@@ -1,0 +1,11 @@
+<!-- task-list.component.html -->
+<div *ngIf="tasks.length > 0">
+  <h2>Task List</h2>
+  <div *ngFor="let task of tasks" class="task-item">
+    <span>{{ task.description }}</span>
+    <button mat-button color="primary" (click)="openEditDialog(task)">Edit</button>
+  </div>
+</div>
+<div *ngIf="tasks.length === 0">
+  <p>No tasks available.</p>
+</div>
